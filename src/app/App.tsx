@@ -1,63 +1,10 @@
 import { A4Guide } from "./components/A4Guide";
 
 export default function App() {
-  const handlePrint = () => {
-    window.print();
-  };
-
   return (
     <>
-      {/* Print button — hidden when printing */}
       <div
-        className="print:hidden"
-        style={{
-          position: "fixed",
-          top: 20,
-          right: 24,
-          zIndex: 100,
-        }}
-      >
-        <button
-          onClick={handlePrint}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            background: "#111",
-            color: "#fff",
-            border: "none",
-            borderRadius: 6,
-            padding: "10px 20px",
-            fontSize: 13,
-            fontWeight: 700,
-            cursor: "pointer",
-            boxShadow: "0 4px 16px rgba(0,0,0,0.25)",
-            letterSpacing: 0.3,
-            fontFamily:
-              "'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif",
-          }}
-        >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="6 9 6 2 18 2 18 9" />
-            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-            <rect x="6" y="14" width="12" height="8" />
-          </svg>
-          PDF로 출력
-        </button>
-      </div>
-
-      {/* Page background */}
-      <div
-        className="print:bg-white print:p-0"
+        className="screen-wrapper"
         style={{
           minHeight: "100vh",
           background: "#d1d5db",
@@ -70,18 +17,41 @@ export default function App() {
         <A4Guide />
       </div>
 
-      {/* Print styles */}
       <style>{`
+        * { margin: 0; padding: 0; }
         @media print {
           @page {
-            size: A4;
+            size: 210mm 297mm;
             margin: 0;
           }
+          html {
+            width: 210mm;
+            height: 297mm;
+          }
           body {
-            margin: 0;
-            padding: 0;
+            width: 210mm;
+            height: 297mm;
+            overflow: hidden;
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
+          }
+          .screen-wrapper {
+            width: 210mm !important;
+            height: 297mm !important;
+            min-height: 0 !important;
+            background: #fff !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            display: flex !important;
+            align-items: stretch !important;
+            justify-content: stretch !important;
+            overflow: hidden !important;
+          }
+          .a4-page {
+            width: 210mm !important;
+            height: 297mm !important;
+            box-shadow: none !important;
+            overflow: hidden !important;
           }
         }
       `}</style>
