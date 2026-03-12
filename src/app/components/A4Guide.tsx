@@ -53,19 +53,19 @@ const C = {
   bg: "#f6f6f6",
 };
 
-// ── Section heading — black pill label ────────────
+// ── Section heading — light pill tag ──────────────
 function Heading({ children }: { children: string }) {
   return (
     <div style={{ marginBottom: 12 }}>
       <span style={{
         display: "inline-block",
-        fontSize: 9,
+        fontSize: 8.5,
         fontWeight: 700,
-        color: "#fff",
-        background: C.black,
-        padding: "3.5px 10px 3px",
-        borderRadius: 2,
+        color: C.dark,
         letterSpacing: 0.3,
+        background: C.bg,
+        padding: "3.5px 10px 3px",
+        borderRadius: 10,
       }}>{children}</span>
     </div>
   );
@@ -124,7 +124,7 @@ export function A4Guide() {
           2025 봄시즌&ensp;&middot;&ensp;소통의기술&ensp;&middot;&ensp;2025. 03. 07 토요일
         </div>
         <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-          <span style={{ fontSize: 14, fontWeight: 500, color: C.faint, letterSpacing: -0.5 }}>01</span>
+          <span style={{ fontSize: 16, fontWeight: 400, color: C.cap, letterSpacing: -0.5, fontFamily: F.serif }}>01</span>
           <span style={{ fontSize: 21, fontWeight: 800, color: C.black, letterSpacing: -0.8 }}>정보-전달 시각화 1</span>
         </div>
       </div>
@@ -133,6 +133,7 @@ export function A4Guide() {
       <div style={{
         padding: `9px ${M}px`,
         borderBottom: `1px solid ${C.rule}`,
+        background: C.bg,
         flexShrink: 0,
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
@@ -157,198 +158,177 @@ export function A4Guide() {
       {/* ▌ Two-column body */}
       <div style={{
         flex: 1,
-        display: "flex",
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gridTemplateRows: "auto auto 1fr",
         overflow: "hidden",
-        position: "relative",
       }}>
-        {/* Center divider with top/bottom margin */}
-        <div style={{
-          position: "absolute",
-          left: "50%",
-          top: 20,
-          bottom: 20,
-          width: 1,
-          background: C.ruleLight,
-        }} />
 
-        {/* ── Left ── */}
+        {/* ── Top-left: Timetable ── */}
         <div style={{
-          flex: 1,
           padding: `22px 22px 20px ${M}px`,
-          display: "flex",
-          flexDirection: "column",
-          overflow: "hidden",
         }}>
-
-          {/* Timetable */}
-          <div style={{ marginBottom: 26 }}>
-            <Heading>타임테이블</Heading>
-            {timetable.map((row, i) => (
-              <div key={i} style={{
-                display: "flex",
-                alignItems: "baseline",
-                padding: "7px 0",
-                borderBottom: i < timetable.length - 1 ? `1px solid ${C.ruleLight}` : "none",
-              }}>
-                <span style={{
-                  width: 106,
-                  fontSize: 10,
-                  fontWeight: 500,
-                  color: row.main ? C.sub : C.faint,
-                  fontVariantNumeric: "tabular-nums",
-                  letterSpacing: -0.2,
-                  flexShrink: 0,
-                }}>{row.time}</span>
-                <span style={{
-                  fontSize: 11,
-                  fontWeight: row.main ? 700 : 400,
-                  color: row.main ? C.black : C.faint,
-                  letterSpacing: -0.3,
-                }}>{row.label}</span>
-              </div>
-            ))}
-            <p style={{
-              margin: "16px 0 0",
-              fontSize: 9.5,
-              color: C.sub,
-              lineHeight: 1.65,
-            }}>
-              다음 <strong style={{ color: C.black }}>2회차</strong>는{" "}
-              <strong style={{ color: C.black }}>3월 21일 (토) 10:30</strong>{" "}
-              오아시스 덕수궁입니다.
-            </p>
-          </div>
-
-          {/* Small talk */}
-          <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-            <Heading>스몰토크</Heading>
-            <div style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              marginBottom: 14,
+          <Heading>타임테이블</Heading>
+          {timetable.map((row, i) => (
+            <div key={i} style={{
+              display: "flex",
+              alignItems: "baseline",
+              padding: "7px 0",
+              borderBottom: i < timetable.length - 1 ? `1px solid ${C.ruleLight}` : "none",
             }}>
               <span style={{
-                fontSize: 7,
-                fontWeight: 700,
-                background: C.black,
-                color: "#fff",
-                padding: "2.5px 7px 2px",
-                letterSpacing: 0.8,
-                lineHeight: 1,
-              }}>PARTNER</span>
+                width: 106,
+                fontSize: 10,
+                fontWeight: 500,
+                color: row.main ? C.sub : C.faint,
+                fontVariantNumeric: "tabular-nums",
+                letterSpacing: -0.2,
+                flexShrink: 0,
+              }}>{row.time}</span>
+              <span style={{
+                fontSize: 11,
+                fontWeight: row.main ? 700 : 400,
+                color: row.main ? C.black : C.faint,
+                letterSpacing: -0.3,
+              }}>{row.label}</span>
+            </div>
+          ))}
+          <p style={{
+            margin: "16px 0 0",
+            fontSize: 9.5,
+            color: C.sub,
+            lineHeight: 1.65,
+          }}>
+            다음 <strong style={{ color: C.black }}>2회차</strong>는{" "}
+            <strong style={{ color: C.black }}>3월 21일 (토) 10:30</strong>{" "}
+            오아시스 덕수궁입니다.
+          </p>
+        </div>
+
+        {/* ── Top-right: Notices ── */}
+        <div style={{
+          padding: `22px ${M}px 20px 22px`,
+        }}>
+          <Heading>주요 공지</Heading>
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            {notices.map((text, i) => (
+              <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <span style={{
+                  fontSize: 11,
+                  fontWeight: 800,
+                  color: C.black,
+                  flexShrink: 0,
+                  minWidth: 14,
+                  marginTop: 1,
+                }}>{i + 1}</span>
+                <span style={{
+                  fontSize: 10.5,
+                  color: C.body,
+                  lineHeight: 1.75,
+                  letterSpacing: -0.1,
+                }}>{text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Horizontal divider ── */}
+        <div style={{
+          gridColumn: "1 / -1",
+          margin: `0 ${M}px`,
+          borderTop: `1px solid ${C.ruleLight}`,
+        }} />
+
+        {/* ── Bottom-left: Small talk ── */}
+        <div style={{
+          padding: `20px 22px 20px ${M}px`,
+          display: "flex",
+          flexDirection: "column",
+        }}>
+          <Heading>스몰토크</Heading>
+          <div style={{ marginBottom: 14 }}>
+            <div style={{
+              fontSize: 7.5,
+              fontWeight: 700,
+              color: C.cap,
+              letterSpacing: 0.8,
+              lineHeight: 1,
+              marginBottom: 6,
+            }}>PARTNER</div>
+            <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
               <span style={{ fontSize: 12, fontWeight: 700, color: C.black, letterSpacing: -0.3 }}>
                 {partner.name}
               </span>
               <span style={{ fontSize: 9.5, color: C.cap }}>{partner.org}</span>
             </div>
-
-            {members.map((m, i) => (
-              <div key={i} style={{
-                display: "flex",
-                alignItems: "baseline",
-                padding: "6px 0",
-                borderBottom: `1px solid ${C.ruleLight}`,
-                gap: 8,
-              }}>
-                <span style={{
-                  fontSize: 11,
-                  fontWeight: 600,
-                  color: C.dark,
-                  letterSpacing: -0.2,
-                  flexShrink: 0,
-                  minWidth: 52,
-                }}>{m.name}</span>
-                <span style={{ fontSize: 9.5, color: C.cap, letterSpacing: -0.1 }}>{m.org}</span>
-              </div>
-            ))}
-
-            <p style={{
-              margin: "18px 0 0",
-              fontSize: 9.5,
-              color: C.cap,
-              lineHeight: 1.65,
-            }}>
-              멤버에게 궁금한 질문이 있다면 자유롭게 공유해주세요.
-            </p>
-            <div style={{ flex: 1, minHeight: 50 }} />
           </div>
+
+          {members.map((m, i) => (
+            <div key={i} style={{
+              display: "flex",
+              alignItems: "baseline",
+              padding: "6px 0",
+              borderBottom: `1px solid ${C.ruleLight}`,
+              gap: 8,
+            }}>
+              <span style={{
+                fontSize: 11,
+                fontWeight: 600,
+                color: C.dark,
+                letterSpacing: -0.2,
+                flexShrink: 0,
+                minWidth: 52,
+              }}>{m.name}</span>
+              <span style={{ fontSize: 9.5, color: C.cap, letterSpacing: -0.1 }}>{m.org}</span>
+            </div>
+          ))}
+
+          <p style={{
+            margin: "18px 0 0",
+            fontSize: 9.5,
+            color: C.cap,
+            lineHeight: 1.65,
+          }}>
+            멤버에게 궁금한 질문이 있다면 자유롭게 공유해주세요.
+          </p>
         </div>
 
-        {/* ── Right ── */}
+        {/* ── Bottom-right: Events ── */}
         <div style={{
-          flex: 1,
-          padding: `22px ${M}px 20px 22px`,
+          padding: `20px ${M}px 20px 22px`,
           display: "flex",
           flexDirection: "column",
-          overflow: "hidden",
         }}>
-
-          {/* Notices */}
-          <div style={{ marginBottom: 26 }}>
-            <Heading>주요 공지</Heading>
-            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              {notices.map((text, i) => (
-                <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-                  <span style={{
-                    width: 18,
-                    height: 18,
-                    minWidth: 18,
-                    background: C.black,
-                    color: "#fff",
-                    borderRadius: "50%",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: 8.5,
-                    fontWeight: 700,
-                    flexShrink: 0,
-                    marginTop: 2,
-                  }}>{i + 1}</span>
-                  <span style={{
-                    fontSize: 10.5,
-                    color: C.body,
-                    lineHeight: 1.75,
-                    letterSpacing: -0.1,
-                  }}>{text}</span>
+          <Heading>다가오는 이벤트</Heading>
+          {events.map((ev, i) => (
+            <div key={i} style={{
+              display: "flex",
+              padding: "10px 0",
+              borderBottom: `1px solid ${C.ruleLight}`,
+              gap: 12,
+            }}>
+              <div style={{ width: 46, flexShrink: 0, textAlign: "center" as const }}>
+                <div style={{ fontSize: 16, fontWeight: 800, color: C.black, lineHeight: 1, letterSpacing: -0.5 }}>
+                  {ev.day.split(".")[1]}
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Events */}
-          <div>
-            <Heading>다가오는 이벤트</Heading>
-            {events.map((ev, i) => (
-              <div key={i} style={{
-                display: "flex",
-                padding: "10px 0",
-                borderBottom: `1px solid ${C.ruleLight}`,
-                gap: 12,
-              }}>
-                <div style={{ width: 46, flexShrink: 0, textAlign: "center" as const }}>
-                  <div style={{ fontSize: 16, fontWeight: 800, color: C.black, lineHeight: 1, letterSpacing: -0.5 }}>
-                    {ev.day.split(".")[1]}
-                  </div>
-                  <div style={{ fontSize: 8, color: C.faint, marginTop: 3, fontWeight: 500 }}>
-                    3월 ({ev.dow})
-                  </div>
-                </div>
-                <div style={{ flex: 1, paddingTop: 1 }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: C.black, lineHeight: 1.35, letterSpacing: -0.2 }}>
-                    {ev.title}
-                  </div>
-                  <div style={{ fontSize: 9, color: C.cap, marginTop: 4, lineHeight: 1.4 }}>
-                    {ev.venue}&ensp;&middot;&ensp;{ev.time}
-                  </div>
+                <div style={{ fontSize: 8, color: C.faint, marginTop: 3, fontWeight: 500 }}>
+                  {ev.day.split(".")[0]}월 ({ev.dow})
                 </div>
               </div>
-            ))}
-            <p style={{ margin: "14px 0 0", fontSize: 8.5, color: C.faint, lineHeight: 1.65 }}>
-              * 봄시즌 등록된 멤버 모두 참여 가능<br />
-              * 슬랙의 각 이벤트 채널에서 신청
-            </p>
-          </div>
+              <div style={{ flex: 1, paddingTop: 1 }}>
+                <div style={{ fontSize: 11, fontWeight: 700, color: C.black, lineHeight: 1.35, letterSpacing: -0.2 }}>
+                  {ev.title}
+                </div>
+                <div style={{ fontSize: 9, color: C.cap, marginTop: 4, lineHeight: 1.4 }}>
+                  {ev.venue}&ensp;&middot;&ensp;{ev.time}
+                </div>
+              </div>
+            </div>
+          ))}
+          <p style={{ margin: "14px 0 0", fontSize: 8.5, color: C.faint, lineHeight: 1.65 }}>
+            * 봄시즌 등록된 멤버 모두 참여 가능<br />
+            * 슬랙의 각 이벤트 채널에서 신청
+          </p>
         </div>
       </div>
 
@@ -359,15 +339,7 @@ export function A4Guide() {
         padding: `12px 0 24px`,
         flexShrink: 0,
       }}>
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 6,
-          marginBottom: 6,
-        }}>
-          <span style={{ fontSize: 9, fontWeight: 700, color: C.dark, letterSpacing: 0.5 }}>4L REVIEW</span>
-          <div style={{ flex: 1, height: 1, background: C.ruleLight }} />
-        </div>
+        <Heading>4L REVIEW</Heading>
 
         {[
           { key: "Liked", desc: "오늘 좋았던 점" },
