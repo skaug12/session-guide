@@ -15,25 +15,14 @@ const timetable = [
   { time: "21:50 – 22:00", label: "4L 리뷰 작성", main: false },
 ];
 
-const partner = { name: "송진우", org: "우버 택시 코리아" };
+const partner = { name: "장재형", org: "잇그린" };
 const members = [
-  { name: "강혜원", org: "바커케미칼코리아" },
-  { name: "김보정", org: "슈미트·똑똑" },
-  { name: "김유일", org: "테크트로닉인더스트리즈코리아" },
-  { name: "김재연", org: "대한항공" },
-  { name: "김향주", org: "더퍼스트터치" },
-  { name: "박명근", org: "NVIDIA" },
-  { name: "박상연", org: "에피원스튜디오" },
-  { name: "박승표", org: "스케일업스쿼드" },
-  { name: "안정민", org: "GS에너지" },
-  { name: "이수림", org: "오뚜기" },
-  { name: "이은혁", org: "삼양홀딩스" },
-  { name: "이정민", org: "매스프레소" },
-  { name: "이정은", org: "필더필" },
-  { name: "이한별", org: "LG에너지솔루션" },
-  { name: "장지웅", org: "삼성바이오로직스" },
-  { name: "조현국", org: "오뚜기" },
-  { name: "홍아람", org: "Apex dynamic" },
+  { name: "권오림", org: "플렉스튜디오" },
+  { name: "남은경", org: "(주)이엠인피니" },
+  { name: "돈명진", org: "LX하우시스" },
+  { name: "원정현", org: "아이큐비아(IQVIA)" },
+  { name: "이현주", org: "디자인피버" },
+  { name: "조연준", org: "잇그린" },
 ];
 
 const notices = [
@@ -44,7 +33,7 @@ const notices = [
 
 const events = [
   { day: "03.18", dow: "수", time: "19:30–21:00", venue: "오아시스 덕수궁", title: "브랜드 토크: 태평양조" },
-  { day: "03.21", dow: "토", time: "15:00–16:30", venue: "오아시스 덕수궁", title: "저자 북토크: <매출을 부르는 회계 감각>" },
+  { day: "03.21", dow: "토", time: "15:00–16:30", venue: "오아시스 덕수궁", title: "저자 북토크: 매출을 부르는 회계 감각" },
   { day: "03.25", dow: "수", time: "19:30–21:00", venue: "오아시스 덕수궁", title: "PEST 브리핑" },
 ];
 
@@ -130,11 +119,11 @@ export function A4Guide() {
           letterSpacing: 0.2,
           marginBottom: 6,
         }}>
-          2026 봄시즌&ensp;&middot;&ensp;전략가의일&ensp;&middot;&ensp;2026. 03. 12 목요일
+          2026 봄시즌&ensp;&middot;&ensp;경영의전설&ensp;&middot;&ensp;2026. 03. 13 금요일
         </div>
         <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
           <span style={{ fontSize: 16, fontWeight: 400, color: C.cap, letterSpacing: -0.5, fontFamily: F.serif }}>01</span>
-          <span style={{ fontSize: 21, fontWeight: 800, color: C.black, letterSpacing: -0.8 }}>The Seven-Step Problem Solving Part I</span>
+          <span style={{ fontSize: 21, fontWeight: 800, color: C.black, letterSpacing: -0.8 }}>실패를 통과하는 일</span>
         </div>
       </div>
 
@@ -154,7 +143,7 @@ export function A4Guide() {
         {[
           ["캘린더", "thehfk.org/calendar"],
           ["인스타그램", "@hfk_official"],
-          ["Wi-Fi", "501_oasisdsg (pw. oasis00000)"],
+          ["Wi-Fi", "301_sojungdong (pw. sojungdong00000)"],
           ["화장실", "W 4F (비번없음) · M 5F (0000)"],
         ].map(([label, value], i) => (
           <div key={i}>
@@ -209,8 +198,8 @@ export function A4Guide() {
             lineHeight: 1.65,
           }}>
             다음 <strong style={{ color: C.black }}>2회차</strong>는{" "}
-            <strong style={{ color: C.black }}>3월 26일 (목) 19:30</strong>{" "}
-            오아시스 덕수궁입니다.
+            <strong style={{ color: C.black }}>3월 27일 (금) 19:30</strong>{" "}
+            소정동입니다.
           </p>
         </div>
 
@@ -342,7 +331,7 @@ export function A4Guide() {
         right: 0,
         background: "#fff",
         borderTop: `1.5px solid ${C.black}`,
-        padding: `10px ${M}px 16px`,
+        padding: `16px ${M}px 16px`,
       }}>
         <Heading>4L REVIEW</Heading>
 
