@@ -8,28 +8,38 @@ const F = {
 
 // ── Data ──────────────────────────────────────────
 const timetable = [
-  { time: "10:30 – 10:40", label: "스몰토크", main: false },
-  { time: "10:40 – 11:40", label: "멤버 및 파트너 소개", main: true },
-  { time: "11:40 – 11:50", label: "쉬는 시간", main: false },
-  { time: "11:50 – 12:50", label: "파트너의 발표 진행", main: true },
-  { time: "12:50 – 13:00", label: "4L 리뷰 작성", main: false },
+  { time: "19:30 – 19:40", label: "스몰토크", main: false },
+  { time: "19:40 – 20:40", label: "멤버 및 파트너 소개", main: true },
+  { time: "20:40 – 20:50", label: "쉬는 시간", main: false },
+  { time: "20:50 – 21:50", label: "파트너의 발표 진행", main: true },
+  { time: "21:50 – 22:00", label: "4L 리뷰 작성", main: false },
 ];
 
-const partner = { name: "박민우", org: "보이스랩" };
+const partner = { name: "송진우", org: "우버 택시 코리아" };
 const members = [
-  { name: "송서현", org: "서울특별시청" },
-  { name: "김다영", org: "(주)다다씨앤씨" },
-  { name: "서지희", org: "신젠타코리아" },
-  { name: "이승원", org: "HD현대일렉트릭" },
-  { name: "이홍진", org: "다이소코리아" },
-  { name: "전소영", org: "아모레퍼시픽" },
-  { name: "홍수경", org: "대한항공" },
+  { name: "강혜원", org: "바커케미칼코리아" },
+  { name: "김보정", org: "슈미트·똑똑" },
+  { name: "김유일", org: "테크트로닉인더스트리즈코리아" },
+  { name: "김재연", org: "대한항공" },
+  { name: "김향주", org: "더퍼스트터치" },
+  { name: "박명근", org: "NVIDIA" },
+  { name: "박상연", org: "에피원스튜디오" },
+  { name: "박승표", org: "스케일업스쿼드" },
+  { name: "안정민", org: "GS에너지" },
+  { name: "이수림", org: "오뚜기" },
+  { name: "이은혁", org: "삼양홀딩스" },
+  { name: "이정민", org: "매스프레소" },
+  { name: "이정은", org: "필더필" },
+  { name: "이한별", org: "LG에너지솔루션" },
+  { name: "장지웅", org: "삼성바이오로직스" },
+  { name: "조현국", org: "오뚜기" },
+  { name: "홍아람", org: "Apex dynamic" },
 ];
 
 const notices = [
-  "봄시즌은 16개 팀, 멤버 123명, 파트너 17명, 크루 2명이 서로 자극을 주고 받으며 성장합니다.",
-  "HFK의 모든 공지는 슬랙으로 전달드리지만, 별도 공지방을 카톡 팀 채팅방으로 오픈했습니다. 반드시 챙겨야 할 스케줄이니 꼭 확인해주세요.",
-  "이번 봄에도 다양한 클럽이 오픈됩니다! 총 31개 클럽 — 온라인 8개, 오프라인 23개를 준비했습니다. (클럽 리스트는 슬랙과 카톡 팀 채팅방의 구글 링크에서 확인)",
+  "봄시즌은 13개 팀, 멤버 123명, 파트너 17명, 크루 2명이 서로 자극을 주고 받으며 성장합니다.",
+  "HFK의 모든 공지는 슬랙으로 전달드리지만, 별도 공지방을 카톡 팀 채팅방으로 오픈했습니다. HFK 봄시즌을 참여하며 반드시 챙겨야 할 스케줄이니 꼭 확인해주세요.",
+  "이번 봄에도 다양한 클럽이 오픈됩니다! 온라인클럽 8개, 오프라인클럽 23개 총 31개 클럽을 준비했습니다. 클럽 채널이 오픈되었으니, 신청한 분들은 확인해주세요.",
 ];
 
 const events = [
@@ -40,7 +50,7 @@ const events = [
 
 // ── Design tokens ─────────────────────────────────
 const M = 44; // page margin
-const ROW_H = 26; // unified row height for 4L + memo
+const ROW_H = 22; // unified row height for 4L + memo
 const C = {
   black: "#0f0f0f",
   dark: "#2a2a2a",
@@ -53,17 +63,17 @@ const C = {
   bg: "#f6f6f6",
 };
 
-// ── Section heading — light pill tag ──────────────
+// ── Section heading — dark pill tag ───────────────
 function Heading({ children }: { children: string }) {
   return (
-    <div style={{ marginBottom: 12 }}>
+    <div style={{ marginBottom: 10 }}>
       <span style={{
         display: "inline-block",
-        fontSize: 8.5,
+        fontSize: 8,
         fontWeight: 700,
-        color: C.dark,
-        letterSpacing: 0.3,
-        background: C.bg,
+        color: "#fff",
+        letterSpacing: 0.5,
+        background: C.dark,
         padding: "3.5px 10px 3px",
         borderRadius: 10,
       }}>{children}</span>
@@ -82,8 +92,7 @@ export function A4Guide() {
         background: "#fff",
         fontFamily: F.sans,
         boxShadow: "0 2px 24px rgba(0,0,0,0.08)",
-        display: "flex",
-        flexDirection: "column",
+        position: "relative" as const,
         overflow: "hidden",
       }}
     >
@@ -110,7 +119,7 @@ export function A4Guide() {
 
       {/* ▌ Title */}
       <div style={{
-        padding: `24px ${M}px 20px`,
+        padding: `20px ${M}px 16px`,
         borderBottom: `1px solid ${C.rule}`,
         flexShrink: 0,
       }}>
@@ -119,25 +128,25 @@ export function A4Guide() {
           fontWeight: 500,
           color: C.cap,
           letterSpacing: 0.2,
-          marginBottom: 8,
+          marginBottom: 6,
         }}>
-          2025 봄시즌&ensp;&middot;&ensp;소통의기술&ensp;&middot;&ensp;2025. 03. 07 토요일
+          2026 봄시즌&ensp;&middot;&ensp;전략가의일&ensp;&middot;&ensp;2026. 03. 12 목요일
         </div>
         <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
           <span style={{ fontSize: 16, fontWeight: 400, color: C.cap, letterSpacing: -0.5, fontFamily: F.serif }}>01</span>
-          <span style={{ fontSize: 21, fontWeight: 800, color: C.black, letterSpacing: -0.8 }}>정보-전달 시각화 1</span>
+          <span style={{ fontSize: 21, fontWeight: 800, color: C.black, letterSpacing: -0.8 }}>The Seven-Step Problem Solving Part I</span>
         </div>
       </div>
 
       {/* ▌ Quick info */}
       <div style={{
-        padding: `9px ${M}px`,
+        padding: `8px ${M}px`,
         borderBottom: `1px solid ${C.rule}`,
         background: C.bg,
         flexShrink: 0,
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
-        gap: "4px 0",
+        gap: "3px 0",
         fontSize: 8.5,
         lineHeight: 1.6,
         color: C.sub,
@@ -157,28 +166,28 @@ export function A4Guide() {
 
       {/* ▌ Two-column body */}
       <div style={{
-        flex: 1,
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
-        gridTemplateRows: "auto auto 1fr",
+        gridTemplateRows: "auto auto auto",
+        paddingBottom: 230,
         overflow: "hidden",
       }}>
 
         {/* ── Top-left: Timetable ── */}
         <div style={{
-          padding: `22px 22px 20px ${M}px`,
+          padding: `18px 22px 16px ${M}px`,
         }}>
           <Heading>타임테이블</Heading>
           {timetable.map((row, i) => (
             <div key={i} style={{
               display: "flex",
               alignItems: "baseline",
-              padding: "7px 0",
+              padding: "6px 0",
               borderBottom: i < timetable.length - 1 ? `1px solid ${C.ruleLight}` : "none",
             }}>
               <span style={{
                 width: 106,
-                fontSize: 10,
+                fontSize: 9.5,
                 fontWeight: 500,
                 color: row.main ? C.sub : C.faint,
                 fontVariantNumeric: "tabular-nums",
@@ -186,7 +195,7 @@ export function A4Guide() {
                 flexShrink: 0,
               }}>{row.time}</span>
               <span style={{
-                fontSize: 11,
+                fontSize: 10.5,
                 fontWeight: row.main ? 700 : 400,
                 color: row.main ? C.black : C.faint,
                 letterSpacing: -0.3,
@@ -194,27 +203,27 @@ export function A4Guide() {
             </div>
           ))}
           <p style={{
-            margin: "16px 0 0",
-            fontSize: 9.5,
+            margin: "14px 0 0",
+            fontSize: 9,
             color: C.sub,
             lineHeight: 1.65,
           }}>
             다음 <strong style={{ color: C.black }}>2회차</strong>는{" "}
-            <strong style={{ color: C.black }}>3월 21일 (토) 10:30</strong>{" "}
+            <strong style={{ color: C.black }}>3월 26일 (목) 19:30</strong>{" "}
             오아시스 덕수궁입니다.
           </p>
         </div>
 
         {/* ── Top-right: Notices ── */}
         <div style={{
-          padding: `22px ${M}px 20px 22px`,
+          padding: `18px ${M}px 16px 22px`,
         }}>
           <Heading>주요 공지</Heading>
-          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {notices.map((text, i) => (
               <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
                 <span style={{
-                  fontSize: 11,
+                  fontSize: 10.5,
                   fontWeight: 800,
                   color: C.black,
                   flexShrink: 0,
@@ -222,9 +231,9 @@ export function A4Guide() {
                   marginTop: 1,
                 }}>{i + 1}</span>
                 <span style={{
-                  fontSize: 10.5,
+                  fontSize: 10,
                   color: C.body,
-                  lineHeight: 1.75,
+                  lineHeight: 1.7,
                   letterSpacing: -0.1,
                 }}>{text}</span>
               </div>
@@ -241,61 +250,54 @@ export function A4Guide() {
 
         {/* ── Bottom-left: Small talk ── */}
         <div style={{
-          padding: `20px 22px 20px ${M}px`,
+          padding: `16px 22px 16px ${M}px`,
           display: "flex",
           flexDirection: "column",
         }}>
           <Heading>스몰토크</Heading>
-          <div style={{ marginBottom: 14 }}>
+          <div style={{ marginBottom: 12 }}>
             <div style={{
               fontSize: 7.5,
               fontWeight: 700,
               color: C.cap,
               letterSpacing: 0.8,
               lineHeight: 1,
-              marginBottom: 6,
+              marginBottom: 5,
             }}>PARTNER</div>
             <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-              <span style={{ fontSize: 12, fontWeight: 700, color: C.black, letterSpacing: -0.3 }}>
+              <span style={{ fontSize: 11.5, fontWeight: 700, color: C.black, letterSpacing: -0.3 }}>
                 {partner.name}
               </span>
-              <span style={{ fontSize: 9.5, color: C.cap }}>{partner.org}</span>
+              <span style={{ fontSize: 9, color: C.cap }}>{partner.org}</span>
             </div>
           </div>
 
-          {members.map((m, i) => (
-            <div key={i} style={{
-              display: "flex",
-              alignItems: "baseline",
-              padding: "6px 0",
-              borderBottom: `1px solid ${C.ruleLight}`,
-              gap: 8,
-            }}>
-              <span style={{
-                fontSize: 11,
-                fontWeight: 600,
-                color: C.dark,
-                letterSpacing: -0.2,
-                flexShrink: 0,
-                minWidth: 52,
-              }}>{m.name}</span>
-              <span style={{ fontSize: 9.5, color: C.cap, letterSpacing: -0.1 }}>{m.org}</span>
-            </div>
-          ))}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 16px" }}>
+            {members.map((m, i) => (
+              <div key={i} style={{
+                display: "flex",
+                alignItems: "baseline",
+                padding: "4px 0",
+                borderBottom: `1px solid ${C.ruleLight}`,
+                gap: 6,
+              }}>
+                <span style={{
+                  fontSize: 10,
+                  fontWeight: 600,
+                  color: C.dark,
+                  letterSpacing: -0.2,
+                  flexShrink: 0,
+                }}>{m.name}</span>
+                <span style={{ fontSize: 8, color: C.cap, letterSpacing: -0.1 }}>{m.org}</span>
+              </div>
+            ))}
+          </div>
 
-          <p style={{
-            margin: "18px 0 0",
-            fontSize: 9.5,
-            color: C.cap,
-            lineHeight: 1.65,
-          }}>
-            멤버에게 궁금한 질문이 있다면 자유롭게 공유해주세요.
-          </p>
         </div>
 
         {/* ── Bottom-right: Events ── */}
         <div style={{
-          padding: `20px ${M}px 20px 22px`,
+          padding: `16px ${M}px 16px 22px`,
           display: "flex",
           flexDirection: "column",
         }}>
@@ -303,29 +305,29 @@ export function A4Guide() {
           {events.map((ev, i) => (
             <div key={i} style={{
               display: "flex",
-              padding: "10px 0",
+              padding: "8px 0",
               borderBottom: `1px solid ${C.ruleLight}`,
               gap: 12,
             }}>
               <div style={{ width: 46, flexShrink: 0, textAlign: "center" as const }}>
-                <div style={{ fontSize: 16, fontWeight: 800, color: C.black, lineHeight: 1, letterSpacing: -0.5 }}>
+                <div style={{ fontSize: 15, fontWeight: 800, color: C.black, lineHeight: 1, letterSpacing: -0.5 }}>
                   {ev.day.split(".")[1]}
                 </div>
-                <div style={{ fontSize: 8, color: C.faint, marginTop: 3, fontWeight: 500 }}>
+                <div style={{ fontSize: 7.5, color: C.faint, marginTop: 3, fontWeight: 500 }}>
                   {ev.day.split(".")[0]}월 ({ev.dow})
                 </div>
               </div>
               <div style={{ flex: 1, paddingTop: 1 }}>
-                <div style={{ fontSize: 11, fontWeight: 700, color: C.black, lineHeight: 1.35, letterSpacing: -0.2 }}>
+                <div style={{ fontSize: 10.5, fontWeight: 700, color: C.black, lineHeight: 1.35, letterSpacing: -0.2 }}>
                   {ev.title}
                 </div>
-                <div style={{ fontSize: 9, color: C.cap, marginTop: 4, lineHeight: 1.4 }}>
+                <div style={{ fontSize: 8.5, color: C.cap, marginTop: 3, lineHeight: 1.4 }}>
                   {ev.venue}&ensp;&middot;&ensp;{ev.time}
                 </div>
               </div>
             </div>
           ))}
-          <p style={{ margin: "14px 0 0", fontSize: 8.5, color: C.faint, lineHeight: 1.65 }}>
+          <p style={{ margin: "12px 0 0", fontSize: 8, color: C.faint, lineHeight: 1.65 }}>
             * 봄시즌 등록된 멤버 모두 참여 가능<br />
             * 슬랙의 각 이벤트 채널에서 신청
           </p>
@@ -334,10 +336,13 @@ export function A4Guide() {
 
       {/* ▌ 4L Review + memo */}
       <div style={{
-        margin: `0 ${M}px`,
+        position: "absolute" as const,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        background: "#fff",
         borderTop: `1.5px solid ${C.black}`,
-        padding: `12px 0 24px`,
-        flexShrink: 0,
+        padding: `10px ${M}px 16px`,
       }}>
         <Heading>4L REVIEW</Heading>
 
