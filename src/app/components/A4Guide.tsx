@@ -6,36 +6,61 @@ const F = {
   serif: "'Media 77', Georgia, 'Times New Roman', serif",
 };
 
-// ── Data ──────────────────────────────────────────
-const timetable = [
-  { time: "19:30 – 19:40", label: "스몰토크", main: false },
-  { time: "19:40 – 20:40", label: "멤버 및 파트너 소개", main: true },
-  { time: "20:40 – 20:50", label: "쉬는 시간", main: false },
-  { time: "20:50 – 21:50", label: "파트너의 발표 진행", main: true },
-  { time: "21:50 – 22:00", label: "4L 리뷰 작성", main: false },
-];
+// ── Types ─────────────────────────────────────────
+export interface HandoutData {
+  season: string;
+  team: string;
+  date: string;
+  sessionNumber: string;
+  topic: string;
+  nextSession: string;
+  venue: string;
+  timetable: { time: string; label: string; main: boolean }[];
+  partner: { name: string; org: string };
+  members: { name: string; org: string }[];
+  notices: string[];
+  events: { day: string; dow: string; time: string; venue: string; title: string }[];
+  wifi: { id: string; pw: string };
+  restroom: string;
+}
 
-const partner = { name: "장재형", org: "잇그린" };
-const members = [
-  { name: "권오림", org: "플렉스튜디오" },
-  { name: "남은경", org: "(주)이엠인피니" },
-  { name: "돈명진", org: "LX하우시스" },
-  { name: "원정현", org: "아이큐비아(IQVIA)" },
-  { name: "이현주", org: "디자인피버" },
-  { name: "조연준", org: "잇그린" },
-];
-
-const notices = [
-  "봄시즌은 13개 팀, 멤버 123명, 파트너 17명, 크루 2명이 서로 자극을 주고 받으며 성장합니다.",
-  "HFK의 모든 공지는 슬랙으로 전달드리지만, 별도 공지방을 카톡 팀 채팅방으로 오픈했습니다. HFK 봄시즌을 참여하며 반드시 챙겨야 할 스케줄이니 꼭 확인해주세요.",
-  "이번 봄에도 다양한 클럽이 오픈됩니다! 온라인클럽 8개, 오프라인클럽 23개 총 31개 클럽을 준비했습니다. 클럽 채널이 오픈되었으니, 신청한 분들은 확인해주세요.",
-];
-
-const events = [
-  { day: "03.18", dow: "수", time: "19:30–21:00", venue: "오아시스 덕수궁", title: "브랜드 토크: 태평양조" },
-  { day: "03.21", dow: "토", time: "15:00–16:30", venue: "오아시스 덕수궁", title: "저자 북토크: 매출을 부르는 회계 감각" },
-  { day: "03.25", dow: "수", time: "19:30–21:00", venue: "오아시스 덕수궁", title: "PEST 브리핑" },
-];
+// ── Default Data (PDF 생성 호환용) ────────────────
+const defaultData: HandoutData = {
+  season: "2026 봄시즌",
+  team: "저스트두잇",
+  date: "2026. 03. 17 화요일",
+  sessionNumber: "01",
+  topic: "나를 소개하는 Zine 만들기",
+  nextSession: "다음 <strong>2회차</strong>는 <strong>3월 31일 (화) 19:30</strong> 오아시스 덕수궁입니다.",
+  venue: "오아시스 덕수궁",
+  timetable: [
+    { time: "19:30 – 19:40", label: "스몰토크", main: false },
+    { time: "19:40 – 20:40", label: "멤버 및 파트너 소개", main: true },
+    { time: "20:40 – 20:50", label: "쉬는 시간", main: false },
+    { time: "20:50 – 21:50", label: "파트너의 발표 진행", main: true },
+    { time: "21:50 – 22:00", label: "4L 리뷰 작성", main: false },
+  ],
+  partner: { name: "김보경", org: "금은보화" },
+  members: [
+    { name: "유선영", org: "초등교사" },
+    { name: "강국주", org: "위즈팜" },
+    { name: "김규리", org: "프리랜서" },
+    { name: "박소현", org: "fadó" },
+    { name: "유희경", org: "매일경제신문" },
+  ],
+  notices: [
+    "봄시즌은 13개 팀, 멤버 123명, 파트너 17명, 크루 2명이 서로 자극을 주고 받으며 성장합니다.",
+    "HFK의 모든 공지는 슬랙으로 전달드리지만, 별도 공지방을 카톡 팀 채팅방으로 오픈했습니다. HFK 봄시즌을 참여하며 반드시 챙겨야 할 스케줄이니 꼭 확인해주세요.",
+    "이번 봄에도 다양한 클럽이 오픈됩니다! 온라인클럽 8개, 오프라인클럽 23개 총 31개 클럽을 준비했습니다. 클럽 채널이 오픈되었으니, 신청한 분들은 확인해주세요.",
+  ],
+  events: [
+    { day: "03.18", dow: "수", time: "19:30–21:00", venue: "오아시스 덕수궁", title: "브랜드 토크: 태평양조" },
+    { day: "03.21", dow: "토", time: "15:00–16:30", venue: "오아시스 덕수궁", title: "저자 북토크: 매출을 부르는 회계 감각" },
+    { day: "03.25", dow: "수", time: "19:30–21:00", venue: "오아시스 덕수궁", title: "PEST 브리핑" },
+  ],
+  wifi: { id: "501_oasisdsg", pw: "oasis00000" },
+  restroom: "W 4F (비번없음) · M 5F (0000)",
+};
 
 // ── Design tokens ─────────────────────────────────
 const M = 44; // page margin
@@ -71,7 +96,9 @@ function Heading({ children }: { children: string }) {
 }
 
 // ── Main ──────────────────────────────────────────
-export function A4Guide() {
+export function A4Guide({ data }: { data?: HandoutData }) {
+  const d = data ?? defaultData;
+
   return (
     <div
       className="a4-page"
@@ -119,11 +146,11 @@ export function A4Guide() {
           letterSpacing: 0.2,
           marginBottom: 6,
         }}>
-          2026 봄시즌&ensp;&middot;&ensp;경영의전설&ensp;&middot;&ensp;2026. 03. 13 금요일
+          {d.season}&ensp;&middot;&ensp;{d.team}&ensp;&middot;&ensp;{d.date}
         </div>
         <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-          <span style={{ fontSize: 16, fontWeight: 400, color: C.cap, letterSpacing: -0.5, fontFamily: F.serif }}>01</span>
-          <span style={{ fontSize: 21, fontWeight: 800, color: C.black, letterSpacing: -0.8 }}>실패를 통과하는 일</span>
+          <span style={{ fontSize: 16, fontWeight: 400, color: C.cap, letterSpacing: -0.5, fontFamily: F.serif }}>{d.sessionNumber}</span>
+          <span style={{ fontSize: 21, fontWeight: 800, color: C.black, letterSpacing: -0.8 }}>{d.topic}</span>
         </div>
       </div>
 
@@ -143,8 +170,8 @@ export function A4Guide() {
         {[
           ["캘린더", "thehfk.org/calendar"],
           ["인스타그램", "@hfk_official"],
-          ["Wi-Fi", "301_sojungdong (pw. sojungdong00000)"],
-          ["화장실", "W 4F (비번없음) · M 5F (0000)"],
+          ["Wi-Fi", `${d.wifi.id} (pw. ${d.wifi.pw})`],
+          ["화장실", d.restroom],
         ].map(([label, value], i) => (
           <div key={i}>
             <span style={{ fontWeight: 700, color: C.dark, marginRight: 6 }}>{label}</span>
@@ -167,12 +194,12 @@ export function A4Guide() {
           padding: `18px 22px 16px ${M}px`,
         }}>
           <Heading>타임테이블</Heading>
-          {timetable.map((row, i) => (
+          {d.timetable.map((row, i) => (
             <div key={i} style={{
               display: "flex",
               alignItems: "baseline",
               padding: "6px 0",
-              borderBottom: i < timetable.length - 1 ? `1px solid ${C.ruleLight}` : "none",
+              borderBottom: i < d.timetable.length - 1 ? `1px solid ${C.ruleLight}` : "none",
             }}>
               <span style={{
                 width: 106,
@@ -196,11 +223,7 @@ export function A4Guide() {
             fontSize: 9,
             color: C.sub,
             lineHeight: 1.65,
-          }}>
-            다음 <strong style={{ color: C.black }}>2회차</strong>는{" "}
-            <strong style={{ color: C.black }}>3월 27일 (금) 19:30</strong>{" "}
-            소정동입니다.
-          </p>
+          }} dangerouslySetInnerHTML={{ __html: d.nextSession }} />
         </div>
 
         {/* ── Top-right: Notices ── */}
@@ -209,7 +232,7 @@ export function A4Guide() {
         }}>
           <Heading>주요 공지</Heading>
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            {notices.map((text, i) => (
+            {d.notices.map((text, i) => (
               <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
                 <span style={{
                   fontSize: 10.5,
@@ -255,14 +278,14 @@ export function A4Guide() {
             }}>PARTNER</div>
             <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
               <span style={{ fontSize: 11.5, fontWeight: 700, color: C.black, letterSpacing: -0.3 }}>
-                {partner.name}
+                {d.partner.name}
               </span>
-              <span style={{ fontSize: 9, color: C.cap }}>{partner.org}</span>
+              <span style={{ fontSize: 9, color: C.cap }}>{d.partner.org}</span>
             </div>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 16px" }}>
-            {members.map((m, i) => (
+            {d.members.map((m, i) => (
               <div key={i} style={{
                 display: "flex",
                 alignItems: "baseline",
@@ -291,7 +314,7 @@ export function A4Guide() {
           flexDirection: "column",
         }}>
           <Heading>다가오는 이벤트</Heading>
-          {events.map((ev, i) => (
+          {d.events.map((ev, i) => (
             <div key={i} style={{
               display: "flex",
               padding: "8px 0",
