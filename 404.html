@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>페이지 이동됨</title>
+<script>
+(function () {
+  var target = "https://thehfk.github.io/session-guide";
+  var path = location.pathname.replace(/^\/session-guide/, "");
+  location.replace(target + path + location.search + location.hash);
+})();
+</script>
+</head>
+<body>
+<p>페이지가 이동했습니다: <a href="https://thehfk.github.io/session-guide/">https://thehfk.github.io/session-guide/</a></p>
+</body>
+</html>
